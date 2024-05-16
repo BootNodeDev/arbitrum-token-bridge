@@ -397,7 +397,7 @@ export function sanitizeTokenName(
 export function erc20DataToErc20BridgeToken(data: Erc20Data): ERC20BridgeToken {
   return {
     name: data.name,
-    type: TokenType.ERC20, // TODO check for xerc20Bridge and assign TokenType.XERC20?
+    type: TokenType.ERC20,
     symbol: data.symbol,
     address: data.address,
     decimals: data.decimals,
