@@ -50,7 +50,7 @@ export class BridgeTransferStarterFactory {
       destinationChainProvider,
       sourceChainErc20Address: props.sourceChainErc20Address,
       destinationChainErc20Address: props.destinationChainErc20Address,
-      adapter: props.adapter
+      adapters: props.adapters
     }
 
     const { isDeposit, isNativeCurrencyTransfer, isSupported } =
@@ -70,8 +70,8 @@ export class BridgeTransferStarterFactory {
     // deposits
     if (isDeposit) {
       if (!isNativeCurrencyTransfer) {
-        console.log('props.adapter', props.adapter)
-        if (props.adapter) {
+        console.log('props.depositAdapter', props.adapters?.deposit)
+        if (props.adapters?.deposit) {
           console.log('using xerc20 deposit')
           return withCache(cacheKey, new XErc20DepositStarter(initProps))
         } else {
@@ -82,8 +82,8 @@ export class BridgeTransferStarterFactory {
     }
     // withdrawals
     if (!isNativeCurrencyTransfer) {
-      console.log('props.adapter', props.adapter)
-      if (props.adapter) {
+      console.log('props.withdrawalAdapter', props.adapters?.withdrawal)
+      if (props.adapters?.withdrawal) {
         console.log('using xerc20 withdrawal')
         return withCache(cacheKey, new XErc20WithdrawalStarter(initProps))
       } else {

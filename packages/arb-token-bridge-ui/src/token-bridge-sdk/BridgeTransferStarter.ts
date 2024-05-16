@@ -29,12 +29,14 @@ export type BridgeTransfer = {
   destinationChainTransaction?: { hash: string }
 }
 
+export type XERC20Adapters = Record<TxType, string>
+
 export type BridgeTransferStarterProps = {
   sourceChainProvider: Provider
   sourceChainErc20Address?: string
   destinationChainProvider: Provider
   destinationChainErc20Address?: string
-  adapter?: string
+  adapters?: XERC20Adapters
 }
 
 export type BridgeTransferStarterPropsWithChainIds = {
@@ -42,7 +44,7 @@ export type BridgeTransferStarterPropsWithChainIds = {
   sourceChainErc20Address?: string
   destinationChainId: number
   destinationChainErc20Address?: string
-  adapter?: string
+  adapters?: XERC20Adapters
 }
 
 export type TransferEstimateGas = {
@@ -87,7 +89,7 @@ export abstract class BridgeTransferStarter {
   public destinationChainProvider: Provider
   public sourceChainErc20Address?: string
   public destinationChainErc20Address?: string
-  public adapter?: string
+  public adapters?: XERC20Adapters
 
   abstract transferType: TransferType
 
@@ -96,7 +98,7 @@ export abstract class BridgeTransferStarter {
     this.destinationChainProvider = props.destinationChainProvider
     this.sourceChainErc20Address = props.sourceChainErc20Address
     this.destinationChainErc20Address = props.destinationChainErc20Address
-    this.adapter = props.adapter
+    this.adapters = props.adapters
   }
 
   public abstract requiresNativeCurrencyApproval(

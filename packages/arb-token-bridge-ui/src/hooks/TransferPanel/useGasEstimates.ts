@@ -5,6 +5,7 @@ import { useSigner } from 'wagmi'
 import { DepositGasEstimates, GasEstimates } from '../arbTokenBridge.types'
 import { BridgeTransferStarterFactory } from '@/token-bridge-sdk/BridgeTransferStarterFactory'
 import { useAppState } from '../../state'
+import { XERC20Adapters } from '@/token-bridge-sdk/BridgeTransferStarter'
 
 async function fetcher([
   signer,
@@ -13,7 +14,7 @@ async function fetcher([
   sourceChainErc20Address,
   destinationChainErc20Address,
   amount,
-  adapter
+  adapters
 ]: [
   signer: Signer,
   sourceChainId: number,
@@ -21,7 +22,7 @@ async function fetcher([
   sourceChainErc20Address: string | undefined,
   destinationChainErc20Address: string | undefined,
   amount: BigNumber,
-  adapter: string | undefined
+  adapters: XERC20Adapters | undefined
 ]): Promise<GasEstimates | DepositGasEstimates | undefined> {
   // use chainIds to initialize the bridgeTransferStarter to save RPC calls
   const bridgeTransferStarter = await BridgeTransferStarterFactory.create({
@@ -29,7 +30,7 @@ async function fetcher([
     sourceChainErc20Address,
     destinationChainId,
     destinationChainErc20Address,
-    adapter: adapter ?? ''
+    adapters
   })
 
   return await bridgeTransferStarter.transferEstimateGas({
@@ -85,7 +86,7 @@ export function useGasEstimates({
         sourceChainErc20Address,
         destinationChainErc20Address,
         amount,
-        selectedToken ? selectedToken.xerc20Bridge : ''
+        selectedToken ? selectedToken.xerc20BridgeAdapters : undefined
       ])
     },
     {

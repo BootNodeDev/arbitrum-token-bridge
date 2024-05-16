@@ -71,8 +71,7 @@ export function CustomFeeTokenApprovalDialog(
             sourceChainId: sourceChain.id,
             sourceChainErc20Address: selectedToken?.address,
             destinationChainId: destinationChain.id,
-            destinationChainErc20Address: selectedToken?.l2Address,
-            adapter: selectedToken?.xerc20Bridge ?? 'b'
+            destinationChainErc20Address: selectedToken?.l2Address
           }
         )
 

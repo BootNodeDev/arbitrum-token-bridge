@@ -615,11 +615,12 @@ export function TokenSearch({
 
       if (data) {
         const tokensImported = { ...tokensFromLists, ...tokensFromUser }
-        const xerc20Bridge = tokensImported[_token.address]?.xerc20Bridge
+        const xerc20BridgeAdapters =
+          tokensImported[_token.address]?.xerc20BridgeAdapters
 
         token.updateTokenData(_token.address)
         setSelectedToken({
-          ...erc20DataToErc20BridgeToken({ ...data, xerc20Bridge }),
+          ...erc20DataToErc20BridgeToken({ ...data, xerc20BridgeAdapters }),
           l2Address: _token.l2Address
         })
       }

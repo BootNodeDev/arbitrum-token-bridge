@@ -112,8 +112,7 @@ export function TokenApprovalDialog(props: TokenApprovalDialogProps) {
             destinationChainId: destinationChain.id,
             destinationChainErc20Address: isDepositMode
               ? token.l2Address
-              : token.address,
-            adapter: token.xerc20Bridge ?? 'a'
+              : token.address
           }
         )
 

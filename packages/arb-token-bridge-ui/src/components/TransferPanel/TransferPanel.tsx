@@ -702,8 +702,7 @@ export function TransferPanel() {
         sourceChainId,
         sourceChainErc20Address,
         destinationChainId,
-        destinationChainErc20Address,
-        adapter: selectedToken?.xerc20Bridge ?? 'c'
+        destinationChainErc20Address
       })
 
       const { isNativeCurrencyTransfer, isWithdrawal } =

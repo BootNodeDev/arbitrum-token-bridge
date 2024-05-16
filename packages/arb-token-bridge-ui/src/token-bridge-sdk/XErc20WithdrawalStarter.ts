@@ -19,14 +19,11 @@ export class XErc20WithdrawalStarter extends Erc20WithdrawalStarter {
   constructor(props: BridgeTransferStarterProps) {
     super(props)
 
-    if (!this.adapter) {
-      // TODO check for ... and change name
+    if (!this.adapters?.withdrawal) {
       throw Error('Address for XERC20 adapter was expected')
     }
 
-    // TODO change to 0xa399D70735BD37d786D9E49d03DEA44Cde603Dcd as source adapter.
-    this.sourceChainAdapterAddress =
-      '0xa399D70735BD37d786D9E49d03DEA44Cde603Dcd' // TODO this.adapter
+    this.sourceChainAdapterAddress = this.adapters.withdrawal
   }
 
   protected async getSourceChainGatewayAddress(): Promise<string> {

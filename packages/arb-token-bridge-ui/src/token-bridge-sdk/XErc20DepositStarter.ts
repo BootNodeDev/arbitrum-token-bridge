@@ -17,11 +17,11 @@ export class XErc20DepositStarter extends Erc20DepositStarter {
   constructor(props: BridgeTransferStarterProps) {
     super(props)
 
-    if (!this.adapter) {
+    if (!this.adapters?.deposit) {
       throw Error('Address for XERC20 adapter was expected')
     }
 
-    this.sourceChainAdapterAddress = this.adapter
+    this.sourceChainAdapterAddress = this.adapters.deposit
   }
 
   protected async getSourceChainGatewayAddress() {
