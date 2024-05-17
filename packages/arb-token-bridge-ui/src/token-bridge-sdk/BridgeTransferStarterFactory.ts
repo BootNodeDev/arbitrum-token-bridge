@@ -82,13 +82,13 @@ export class BridgeTransferStarterFactory {
     }
     // withdrawals
     if (!isNativeCurrencyTransfer) {
-      console.log('props.withdrawalAdapter', props.adapters?.withdrawal)
-      if (props.adapters?.withdrawal) {
-        console.log('using xerc20 withdrawal')
-        return withCache(cacheKey, new XErc20WithdrawalStarter(initProps))
-      } else {
-        return withCache(cacheKey, new Erc20WithdrawalStarter(initProps))
-      }
+      // console.log('props.withdrawalAdapter', props.adapters?.withdrawal)
+      //  if (props.adapters?.withdrawal) {
+      //console.log('using xerc20 withdrawal')
+      // return withCache(cacheKey, new XErc20WithdrawalStarter(initProps))
+      //  } else {
+      return withCache(cacheKey, new Erc20WithdrawalStarter(initProps))
+      // }
     }
     return withCache(cacheKey, new EthWithdrawalStarter(initProps))
   }

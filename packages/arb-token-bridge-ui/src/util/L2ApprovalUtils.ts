@@ -42,6 +42,18 @@ const L2ApproveTokens: { [chainId: number]: RequireL2ApproveToken[] } = {
       l1Address: '0xd781cea0b8D5dDd0aeeD1dF7aC109C974A221B00',
       l2Address: '0xe267c440dbfb1e185d506c2cc3c44eb21340e046'
     }
+  ],
+  [ChainId.ArbitrumSepolia]: [
+    {
+      symbol: 'xbeeneETH',
+      l1Address: '0x8A7E1aa4a928828c4e101DaFc589AD4acaDF041a',
+      l2Address: '0x39d26D04B9415D345285614aeB756f89ad34e9a1'
+    },
+    {
+      symbol: 'xerc20ETH',
+      l1Address: '0xBc51b90c68D2AB84D40a2b0d3e3A210AAa577584',
+      l2Address: '0xBc51b90c68D2AB84D40a2b0d3e3A210AAa577584'
+    }
   ]
 }
 

@@ -13,6 +13,7 @@ import { withdrawInitTxEstimateGas } from '../util/WithdrawalUtils'
 import { addressIsSmartContract } from '../util/AddressUtils'
 import { Erc20WithdrawalStarter } from './Erc20WithdrawalStarter'
 
+// TODO Remove
 export class XErc20WithdrawalStarter extends Erc20WithdrawalStarter {
   protected sourceChainAdapterAddress: string
 
