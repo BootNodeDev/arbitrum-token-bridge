@@ -23,11 +23,11 @@
             "deposit": "0xc5B700ab0491eEBBFf9dD85C74955E10f788D410",
             "withdrawal": "0xa399D70735BD37d786D9E49d03DEA44Cde603Dcd"
           }
-        }
-      },
-      "l1Address": "0xBc51b90c68D2AB84D40a2b0d3e3A210AAa577584",
-      "l2GatewayAddress": "0x30BEc9c7C2d102aF63F23712bEAc69cdF013f062",
-      "l1GatewayAddress": "0x30BEc9c7C2d102aF63F23712bEAc69cdF013f062"
+        },
+        "l1Address": "0xBc51b90c68D2AB84D40a2b0d3e3A210AAa577584",
+        "l2GatewayAddress": "0x30BEc9c7C2d102aF63F23712bEAc69cdF013f062",
+        "l1GatewayAddress": "0x30BEc9c7C2d102aF63F23712bEAc69cdF013f062"
+      }
     },
     {
       "chainId": 11155111,
@@ -50,12 +50,6 @@
             "tokenAddress": "0x8A7E1aa4a928828c4e101DaFc589AD4acaDF041a",
             "originBridgeAddress": "0x4f2146d55076eCF795491020dd4FDf7a8663c912",
             "destBridgeAddress": "0x4f2146d55076eCF795491020dd4FDf7a8663c912"
-          },
-          "xerc20Bridge": {
-            "11155111": {
-              "deposit": "0xc5B700ab0491eEBBFf9dD85C74955E10f788D410",
-              "withdrawal": "0xa399D70735BD37d786D9E49d03DEA44Cde603Dcd"
-            }
           }
         },
         "l1Address": "0x8A7E1aa4a928828c4e101DaFc589AD4acaDF041a",
