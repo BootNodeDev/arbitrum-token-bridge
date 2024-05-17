@@ -9,6 +9,7 @@ import { CommonAddress } from './CommonAddressUtils'
 import { ChainId, isNetwork } from './networks'
 import { defaultErc20Decimals } from '../defaults'
 import { ERC20BridgeToken, TokenType } from '../hooks/arbTokenBridge.types'
+import { XERC20Adapters } from '@/token-bridge-sdk/BridgeTransferStarter'
 
 export function getDefaultTokenName(address: string) {
   const lowercased = address.toLowerCase()
@@ -33,6 +34,7 @@ export type Erc20Data = {
   symbol: string
   decimals: number
   address: string
+  xerc20BridgeAdapters?: XERC20Adapters
 }
 
 const erc20DataCacheLocalStorageKey = 'arbitrum:bridge:erc20-cache'
@@ -399,6 +401,7 @@ export function erc20DataToErc20BridgeToken(data: Erc20Data): ERC20BridgeToken {
     symbol: data.symbol,
     address: data.address,
     decimals: data.decimals,
+    xerc20BridgeAdapters: data.xerc20BridgeAdapters,
     listIds: new Set()
   }
 }

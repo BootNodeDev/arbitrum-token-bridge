@@ -9,6 +9,7 @@ import { useTokenLists } from '../../hooks/useTokenLists'
 import { TokenListWithId } from '../../util/TokenListUtils'
 import { useNetworksRelationship } from '../../hooks/useNetworksRelationship'
 import { useNetworks } from '../../hooks/useNetworks'
+import { XERC20Adapters } from '@/token-bridge-sdk/BridgeTransferStarter'
 
 export function useTokensFromLists(): ContractStorage<ERC20BridgeToken> {
   const [networks] = useNetworks()
@@ -64,6 +65,11 @@ function tokenListsToSearchableTokenStorage(
         const stringifiedChainId = String(token.chainId)
         const accAddress = acc[address]
 
+        // @ts-ignore TODO
+        const xerc20BridgeObj: {
+          [chainId: string]: XERC20Adapters
+        } = token?.extensions?.xerc20Bridge
+
         if (stringifiedChainId === l1ChainId) {
           // The address is from an L1 token
           if (typeof accAddress === 'undefined') {
@@ -71,6 +77,17 @@ function tokenListsToSearchableTokenStorage(
             acc[address] = {
               ...token,
               type: TokenType.ERC20,
+              // TODO Improve JSON reading
+              xerc20BridgeAdapters:
+                xerc20BridgeObj &&
+                xerc20BridgeObj[l1ChainId] &&
+                xerc20BridgeObj[l1ChainId]?.withdrawal &&
+                xerc20BridgeObj[l1ChainId]?.deposit
+                  ? {
+                      withdrawal: xerc20BridgeObj[l1ChainId]!.withdrawal,
+                      deposit: xerc20BridgeObj[l1ChainId]!.deposit
+                    }
+                  : undefined,
               l2Address: undefined,
               listIds: new Set()
             }
@@ -110,6 +127,16 @@ function tokenListsToSearchableTokenStorage(
               acc[addressOnL1] = {
                 name: token.name,
                 symbol: token.symbol,
+                xerc20BridgeAdapters:
+                  xerc20BridgeObj &&
+                  xerc20BridgeObj[l1ChainId] &&
+                  xerc20BridgeObj[l1ChainId]?.withdrawal &&
+                  xerc20BridgeObj[l1ChainId]?.deposit
+                    ? {
+                        withdrawal: xerc20BridgeObj[l1ChainId]!.withdrawal,
+                        deposit: xerc20BridgeObj[l1ChainId]!.deposit
+                      }
+                    : undefined,
                 type: TokenType.ERC20,
                 logoURI: token.logoURI,
                 address: addressOnL1,

@@ -4,8 +4,10 @@ import {
 } from './BridgeTransferStarter'
 import { EthDepositStarter } from './EthDepositStarter'
 import { Erc20DepositStarter } from './Erc20DepositStarter'
+import { XErc20DepositStarter } from './XErc20DepositStarter'
 import { EthWithdrawalStarter } from './EthWithdrawalStarter'
 import { Erc20WithdrawalStarter } from './Erc20WithdrawalStarter'
+import { XErc20WithdrawalStarter } from './XErc20WithdrawalStarter'
 import { getBridgeTransferProperties } from './utils'
 import { getProviderForChainId } from '../hooks/useNetworks'
 
@@ -47,7 +49,8 @@ export class BridgeTransferStarterFactory {
       sourceChainProvider,
       destinationChainProvider,
       sourceChainErc20Address: props.sourceChainErc20Address,
-      destinationChainErc20Address: props.destinationChainErc20Address
+      destinationChainErc20Address: props.destinationChainErc20Address,
+      adapters: props.adapters
     }
 
     const { isDeposit, isNativeCurrencyTransfer, isSupported } =
@@ -67,13 +70,25 @@ export class BridgeTransferStarterFactory {
     // deposits
     if (isDeposit) {
       if (!isNativeCurrencyTransfer) {
-        return withCache(cacheKey, new Erc20DepositStarter(initProps))
+        console.log('props.depositAdapter', props.adapters?.deposit)
+        if (props.adapters?.deposit) {
+          console.log('using xerc20 deposit')
+          return withCache(cacheKey, new XErc20DepositStarter(initProps))
+        } else {
+          return withCache(cacheKey, new Erc20DepositStarter(initProps))
+        }
       }
       return withCache(cacheKey, new EthDepositStarter(initProps))
     }
     // withdrawals
     if (!isNativeCurrencyTransfer) {
+      // console.log('props.withdrawalAdapter', props.adapters?.withdrawal)
+      //  if (props.adapters?.withdrawal) {
+      //console.log('using xerc20 withdrawal')
+      // return withCache(cacheKey, new XErc20WithdrawalStarter(initProps))
+      //  } else {
       return withCache(cacheKey, new Erc20WithdrawalStarter(initProps))
+      // }
     }
     return withCache(cacheKey, new EthWithdrawalStarter(initProps))
   }

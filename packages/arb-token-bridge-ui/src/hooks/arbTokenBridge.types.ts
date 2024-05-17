@@ -24,6 +24,7 @@ import {
   Transaction,
   L1ToL2MessageData
 } from './useTransactions'
+import { XERC20Adapters } from '@/token-bridge-sdk/BridgeTransferStarter'
 
 export { OutgoingMessageState }
 
@@ -106,6 +107,7 @@ export interface BridgeToken {
 
 export interface ERC20BridgeToken extends BridgeToken {
   type: TokenType.ERC20
+  xerc20BridgeAdapters?: XERC20Adapters
   decimals: number
 }
 
